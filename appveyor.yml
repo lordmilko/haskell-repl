@@ -1,0 +1,17 @@
+version: 'Build #{build}'
+image: Visual Studio 2019
+configuration: Release
+before_build:
+  - npm install
+  - npm install -g vsce
+build_script:
+  - vsce package
+#on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+artifacts:
+  - path: '*.vsix'
+skip_commits:
+  files:
+    - '**/*.md'
+    - '**/*.yml'
+skip_tags: true

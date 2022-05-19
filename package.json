@@ -1,0 +1,106 @@
+{
+  "name": "haskell-repl",
+    "displayName": "haskell-repl",
+    "description": "Built-in GHCi for Visual Studio Code",
+    "version": "0.1.0",
+    "publisher": "lordmilko",
+    "license": "MIT",
+    "engines": {
+        "vscode": "^1.67.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Debuggers"
+    ],
+    "keywords": [
+        "language",
+        "haskell",
+        "stack",
+        "ghci",
+        "debug"
+    ],
+    "homepage": "https://github.com/lordmilko/haskell-repl",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lordmilko/haskell-repl"
+    },
+    "bugs": {
+        "url": "https://github.com/lordmilko/haskell-repl/issues"
+    },
+    "activationEvents": [
+        "onLanguage:haskell"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "configuration": {
+            "title": "Haskell REPL",
+            "properties": {
+                "haskell-repl.focusTerminalOnReload": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether Haskell REPL should automatically focus the REPL terminal in REPL: Reload mode."
+                }
+            }
+        },
+        
+        "commands": [
+            {
+                "command": "haskell-repl.execute",
+                "title": "Open/Execute REPL",
+                "category": "Haskell"
+            },
+            {
+                "command": "haskell-repl.toggleReplMode",
+                "title": "Toggle REPL Run/Reload",
+                "category": "Haskell"
+            },
+            {
+                "command": "haskell-repl.setReplFunction",
+                "title": "Set REPL Run Function",
+                "category": "Haskell"
+            }
+        ],
+        "keybindings": [
+            {
+                "key": "f5",
+                "command": "haskell-repl.execute",
+                "when": "resourceLangId == haskell"
+            },
+            {
+                "key": "ctrl+f5",
+                "command": "workbench.action.debug.start",
+                "when": "resourceLangId == haskell"
+            },
+            {
+                "key": "ctrl+shift+r",
+                "command": "haskell-repl.toggleReplMode",
+                "when": "resourceLangId == haskell"
+            },
+            {
+                "key": "ctrl+shift+d",
+                "command": "haskell-repl.setReplFunction",
+                "when": "resourceLangId == haskell"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile && npm run lint",
+        "lint": "eslint src --ext ts"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.67.0",
+        "@types/glob": "^7.2.0",
+        "@types/mocha": "^9.1.1",
+        "@types/node": "14.x",
+        "@typescript-eslint/eslint-plugin": "^5.21.0",
+        "@typescript-eslint/parser": "^5.21.0",
+        "eslint": "^8.14.0",
+        "glob": "^8.0.1",
+        "mocha": "^9.2.2",
+        "typescript": "^4.6.4",
+        "@vscode/test-electron": "^2.1.3"
+    }
+}
